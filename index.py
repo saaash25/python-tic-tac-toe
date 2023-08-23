@@ -3,7 +3,7 @@ import re
 import time
 import os
 
-user_input_list =['{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}']
+user_input_list =['1','2','3','4','5','6','7','8','9']
 inputStr ='X'
 
 def user_input(user_input_list_val,inputStr):
@@ -14,7 +14,7 @@ def user_input(user_input_list_val,inputStr):
             position =input(f'{Fore.BLUE}Enter a position from 1-9 to insert {Fore.RED}{inputStr}!!{Fore.RESET}\n')
             if validate(position):
                 if check_value_exist_in_index(default_list,int(position)-1):
-                    default_list[int(position)-1]=f' {inputStr} '
+                    default_list[int(position)-1]=inputStr
                     tempInput =inputStr
                     if tempInput=='X':
                         inputStr='O'
@@ -34,16 +34,17 @@ def user_input(user_input_list_val,inputStr):
         do_start_game()
 
 def display_patern(default_list):
-    print("   |   | ")
-    print("|".join(default_list[0:3]))
-    print("   |   | ")
-    print("---|---|---")
-    print("|".join(default_list[3:6]))
-    print("   |   | ")
-    print("---|---|---")
-    print("   |   | ")
-    print("|".join(default_list[6::]))
-    print("   |   | ")
+    print("   |   |  ")
+    print(" "+default_list[0]+" | "+default_list[1]+" | "+default_list[2]+"  ")
+    print("   |   |  ")
+    print("-----------")
+    print("   |   |  ")
+    print(" "+default_list[3]+" | "+default_list[4]+" | "+default_list[5]+"  ")
+    print("   |   |  ")
+    print("-----------")
+    print("   |   |  ")
+    print(" "+default_list[6]+" | "+default_list[7]+" | "+default_list[8]+"  ")
+    print("   |   |  ")
 
 def is_all_index_filled(default_list):
     return default_list.count(" X ")+default_list.count(' O ')==9
@@ -55,19 +56,19 @@ def validate(value):
     return int(value)-1 in x
 
 def check_value_exist_in_index(default_list,position):
-    x = re.search(r"{[1-9]}",default_list[position])
+    x = re.search(r"[1-9]",default_list[position])
     return x != None
 
 def find_game_winner(default_list,inputStr="X"):
     winner=""
-    possibleWinEntries=[default_list[0].strip()+default_list[1].strip()+default_list[2].strip(),
-                        default_list[3].strip()+default_list[4].strip()+default_list[5].strip(),
-                        default_list[6].strip()+default_list[7].strip()+default_list[8].strip(),
-                        default_list[0].strip()+default_list[3].strip()+default_list[6].strip(),
-                        default_list[1].strip()+default_list[4].strip()+default_list[7].strip(),
-                        default_list[2].strip()+default_list[5].strip()+default_list[8].strip(),
-                        default_list[0].strip()+default_list[4].strip()+default_list[8].strip(),
-                        default_list[2].strip()+default_list[4].strip()+default_list[6].strip()
+    possibleWinEntries=[default_list[0]+default_list[1]+default_list[2],
+                        default_list[3]+default_list[4]+default_list[5],
+                        default_list[6]+default_list[7]+default_list[8],
+                        default_list[0]+default_list[3]+default_list[6],
+                        default_list[1]+default_list[4]+default_list[7],
+                        default_list[2]+default_list[5]+default_list[8],
+                        default_list[0]+default_list[4]+default_list[8],
+                        default_list[2]+default_list[4]+default_list[6]
                         ]
     for item in possibleWinEntries:
         if item=="XXX" or item=="OOO":
@@ -114,7 +115,7 @@ def do_start_game():
     while start.lower()!="y" or start.lower()!="n":
         start=input("Want to play again?\nEnter Y for Yes OR N for No\n")
         if start.lower()=="y":
-            display_initial_messages(['{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}'],'X')
+            display_initial_messages(['1','2','3','4','5','6','7','8','9'],'X')
         elif start.lower()=="n":
             exit()
         else:
