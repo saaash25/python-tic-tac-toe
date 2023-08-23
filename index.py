@@ -1,8 +1,11 @@
 from colorama import Fore
 import re
 import time
+import os
+
 user_input_list =['{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}']
 inputStr ='X'
+
 def user_input(user_input_list_val,inputStr):
     try: 
         default_list =user_input_list_val   
@@ -95,12 +98,13 @@ def display_message(message):
     print(message)
 
 def display_initial_messages(initial_list,initialValue):
+    os.system('clear')
     print("Starting game...!!")
     while True:
         time.sleep(1)
         print("-----------------------------")
         print("1. 'X' for player 1 and 'O' for player 2")
-        print("2. There will be boxes 1-9. each user choose 1 from this to inser their value")
+        print("2. There will be boxes 1-9. each user choose 1 from this to insert their value")
         print("3. Cant't insert values if already a value is there in a box")
         print("------------------------------")
         user_input(initial_list,initialValue)
